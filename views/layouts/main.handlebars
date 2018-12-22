@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Materialize compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/">
+    <title></title>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper orange lighten-2">
+                <a href="/" class="brand-logo">Spoonful</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+                    <li><a href="https://www.bonappetit.com/">Source</a></li>
+                    <li><a href="https://github.com/rchlblns/story-scrape">Github Repo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Mobile navbar -->
+    <!-- <ul class="side-nav darken-3" id="mobile-demo">
+        <li><a href="http://www.theonion.com/" target="_new">Source</a></li>
+        <li><a href="https://github.com/tomtom28/mongodb-web-scraper" target="_new">Github Repo</a></li>
+    </ul> -->
+    <main>
+
+        <!-- Render the articles -->
+        <div class="container">
+            {{{body}}}
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer orange lighten-2">
+        <div class="footer-copyright orange lighten-2">
+            <div class="container"> © 2018 Spoonful</div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Materialize compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Basic Page Javascript -->
+    <script type="text/javascript" src=""></script>
+</body>
+
+</html>
