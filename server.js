@@ -29,7 +29,7 @@ app.get("/scrape", function (req, res) {
     axios.get("https://www.bonappetit.com/recipes").then(function (response) {
         const $ = cheerio.load(response.data);
 
-        $("h1 a").each(function (i, element) {
+        $("div h1").each(function (i, element) {
             const result = {};
 
             result.title = $(this)
@@ -37,7 +37,7 @@ app.get("/scrape", function (req, res) {
                 .text();
             result.link = $(this)
                 .children("a")
-                .text();
+                .attr("href");
 
             db.Article.create(result)
                 .then(function (dbArticle) {
