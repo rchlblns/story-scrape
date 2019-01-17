@@ -1,10 +1,10 @@
 <!-- Iterate over the articles -->
-
-<ul class="collapsible">
+{{#each articles}}
+<ul class="collapsible"  data-collapsible="accordion">
 
     <!-- Dropdown for displaying article information -->
     <li>
-        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>First</div>
+        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>{{title}}</div>
         <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
     </li>
     <!-- Dropdown for viewing comments -->
