@@ -4,7 +4,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const logger = require("morgan");
-const controller = require("./controllers/controller");
 
 // Creating express app and configuring middleware needed for authentication
 const app = express();
@@ -13,11 +12,13 @@ app.use(logger("dev"));
 
 // Handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
-// Makes public a static folder
+// Makes public folder a static directory
 app.use(express.static(__dirname + "/public"));
-app.use(controller);
+// app.use(controller);
+const controller = require("./controllers/controller.js")(app);
 
-// Connect to MongoDB
+// Connect to the MongoDB
+// Set moongoose to leverage ES6 promises
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/storyScraper";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
