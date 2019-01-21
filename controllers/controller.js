@@ -5,14 +5,14 @@ const cheerio = require("cheerio");
 const request = require("request");
 const db = require("../models");
 
-//Routes 
+//Routes
 module.exports = (app) => {
     // Route for getting all articles from the db
     app.get("/", function (req, res) {
         db.Article.find({})
             .then(function (data) {
                 let dbArticle = {
-                    articles: data
+                    article: data
                 };
                 res.render("index", dbArticle);
             })
@@ -23,39 +23,41 @@ module.exports = (app) => {
 
     // Get route for scraping recipes from Bon Appetit
     app.get("/scrape", function (req, res) {
-        request("https://www.houstoniamag.com/eat-and-drink").then(function (error, response, body) {
-            if (!error && response.statuscode === 200) {
+        request("https://www.houstoniamag.com/eat-and-drink", function (error, response, body) {
+            // if (!error && response.statuscode === 200) {
 
-                const $ = cheerio.load(body);
+            const $ = cheerio.load(body);
 
-                $("div").each(function (i, element) {
+            $("div h1").each(function (i, element) {
 
-                    const result = {};
 
-                    result.title = $(element)
-                        .children("h1")
-                        .text();
-                    result.link = $(element)
-                        .children("a")
-                        .attr("href");
+                const result = {};
 
-                    if (result.title && result.link) {
-                        db.Article.create(result)
-                            .then(function (dbArticle) {
-                                console.log(dbArticle);
-                            })
-                            .catch(function (err) {
-                                console.log(err);
-                            });
-                    }
+                result.title = $(this)
+                    .children("a")
+                    .text();
+                result.link = $(this)
+                    .children("a")
+                    .attr("href");
+
+
+                // if (result.title && result.link) {
+                db.Article.create(result)
+                    .then(function (dbArticle) {
+                        console.log(dbArticle);
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+                    // }
                 });
-
+                
+                // } else if (error || response.statuscode != 200) {
+                    //     res.send("Error: Unable to obtain new articles");
+                    // }
+                });
                 res.send("Scrape complete");
-                res.redirect("/");
-            } else if (error || response.statuscode != 200) {
-                res.send("Error: Unable to obtain new articles");
-            }
-        });
+        // res.redirect("/");
     });
 
 
@@ -79,7 +81,10 @@ module.exports = (app) => {
         db.Article.find({})
             .then(function (dbArticle) {
                 // If we were able to successfully find Articles, send them back to the client
-                res.json(dbArticle);
+                let dbData = {
+                    article: dbArticle
+                };
+                res.render(dbData);
             })
             .catch(function (err) {
                 // If an error occurred, send it to the client
